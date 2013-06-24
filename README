@@ -1,0 +1,9 @@
+Knight Moves Solution with BFS algorithm
+
+Usage:
+-s(ize): The size of the board
+-x: the x of the starting point
+-y: the y of the starting point
+-h: print help message
+
+python knight.py -s 8 -x 0 -y 3
