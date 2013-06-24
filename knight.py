@@ -12,7 +12,7 @@ class Point(object):
 
     def __init__(self, x, y, step=0, path=[]):
         """
-        Point object for knight_move 
+        Point object for knight_move
 
         :x: point x
         :y: point y
@@ -29,7 +29,7 @@ class Point(object):
         return self.__str__()
 
     def __unicode__(self):
-        return self.__str__() 
+        return self.__str__()
 
     def __str__(self):
         return u"Point<{0.x}, {0.y}> step={0.step}".format(self)
@@ -47,31 +47,32 @@ def knight_move(size, pre_point, des_point):
     size = int(size)
     board = [[0 for tmp_y in xrange(size)] for tmp_x in xrange(size)]
     queue = [pre_point]  # init search queue
-    rules = ((1, 2) , (2, 1), #1
-             (1, -2), (2, -1), #4
-             (-1, -2),(-2, -1), #3
-             (-2, 1), (-1, 2)) #2
- 
+    rules = ((1, 2), (2, 1),  # 1
+             (1, -2), (2, -1),  # 4
+             (-1, -2), (-2, -1),  # 3
+             (-2, 1), (-1, 2))  # 2
+
     while(queue):
-        pre_point = queue.pop(0) # get first point
+        pre_point = queue.pop(0)  # get first point
         if pre_point.x == des_point.x and pre_point.y == des_point.y:
-            #for line in board:
+            # for line in board:
             #    print line
             return pre_point
 
         for direction in rules:
 
-            next_point = Point(pre_point.x+direction[0], 
-                          pre_point.y+direction[1], 
-                          pre_point.step+1,)
+            next_point = Point(pre_point.x + direction[0],
+                               pre_point.y + direction[1],
+                               pre_point.step + 1,)
 
-            if (0<= next_point.x < size and 0<= next_point.y < size
-                and not board[next_point.y][next_point.x]):
+            if (0 <= next_point.x < size and 0 <= next_point.y < size
+                    and not board[next_point.y][next_point.x]):
                 # check if new point still inside board
                 # and next_point is valided
                 next_point.path = pre_point.path + [next_point]
                 queue.append(next_point)
                 board[next_point.y][next_point.x] = 1
+
 
 def usage():
 
@@ -87,12 +88,12 @@ if __name__ == '__main__':
         opts = getopt.getopt(sys.argv[1:], "s:x:y:h:t:")[0]
     except getopt.GetoptError:
         usage()
-    
+
     try:
         for opt, val in opts:
             if opt == "-s":
                 size = int(val)
-                assert size > 2 # only great than 3 has solution
+                assert size > 2  # only great than 3 has solution
             elif opt == "-x":
                 x = int(val)
                 assert size > x >= 0
@@ -102,7 +103,7 @@ if __name__ == '__main__':
             elif opt == "-h":
                 usage()
 
-        result = knight_move(size, Point(x, y), Point(size-1, size-1))
+        result = knight_move(size, Point(x, y), Point(size - 1, size - 1))
 
         if result:
             for point in result.path:
